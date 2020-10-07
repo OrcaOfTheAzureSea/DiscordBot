@@ -42,9 +42,14 @@ client.on('message', message => {
             break;
 			case 'back':
 			    var wantedChannel =client.channels.cache.get(channelToSendTo);
-				wantedChannel.send('Hey ' + owner + ' ,' + message.author.toString() + ' is back and ready for action!');
+                wantedChannel.send('Hey ' + owner + ' ,' + message.author.toString() + ' is back and ready for action!');
             break;
-            
+
+            // Kind of notification if someone has just joined maybe?
+            case 'hello':
+                var wantedChannel =client.channels.cache.get(channelToSendTo);
+                wantedChannel.send('Hey ' + owner + ' ,' + message.author.toString() + ' has just joined and is down to clown!');
+            break;
          }
     }
 });

@@ -50,6 +50,11 @@ client.on('message', message => {
                 var wantedChannel =client.channels.cache.get(channelToSendTo);
                 wantedChannel.send('Hey ' + owner + ' ,' + message.author.toString() + ' has just joined and is down to clown!');
             break;
+
+            case 'join':
+                var wantedChannel =client.channels.cache.get(channelToSendTo);
+                wantedChannel.send('Hey ' + owner + ' , got room for one more? ' + message.author.toString() + ' wants a piece of the action');
+            break;
          }
     }
 });

@@ -7,8 +7,9 @@ client.once('ready', () => {
 
 var owner = '';
 var channelToSendTo = '';
+var awayPlayers = [];
 
-client.login("NzYxNzMxMDI5NzQ4MDIzMzI3.X3e3TQ.tSXhfO9vnExL7q10YRpdNe9PUV0");
+client.login("NzYxNzMxMDI5NzQ4MDIzMzI3.X3e3TQ.gExQnDV3rLUUO0B2nDPUVbsAJ3k");
 
 client.on('message', message => {
     console.log(message.content);
@@ -37,23 +38,32 @@ client.on('message', message => {
                 channelToSendTo = channelToSendTo.substring(2, channelToSendTo.length-1);
             break;
 			case 'brb':
-			    var wantedChannel =client.channels.cache.get(channelToSendTo);
-				wantedChannel.send('Hey ' + owner + ' ,' + message.author.toString() + ' is going AFK for a moment.');
+                var wantedChannel =client.channels.cache.get(channelToSendTo);
+                awayPlayers.push(message.author.toString());
+				wantedChannel.send('Hey ' + owner + ', ' + message.author.toString() + ' is going AFK for a moment.');
             break;
 			case 'back':
-			    var wantedChannel =client.channels.cache.get(channelToSendTo);
-                wantedChannel.send('Hey ' + owner + ' ,' + message.author.toString() + ' is back and ready for action!');
+                var wantedChannel =client.channels.cache.get(channelToSendTo);
+                var x = awayPlayers.findIndex(element => element == message.author.toString());
+                awayPlayers.splice(x, 1);
+                
+                wantedChannel.send('Hey ' + owner + ', ' + message.author.toString() + ' is back and ready for action!');
             break;
 
             // Kind of notification if someone has just joined maybe?
             case 'hello':
                 var wantedChannel =client.channels.cache.get(channelToSendTo);
-                wantedChannel.send('Hey ' + owner + ' ,' + message.author.toString() + ' has just joined and is down to clown!');
+                wantedChannel.send('Hey ' + owner + ', ' + message.author.toString() + ' has just joined and is down to clown!');
             break;
 
-            case 'join':
+            case 'list':
                 var wantedChannel =client.channels.cache.get(channelToSendTo);
-                wantedChannel.send('Hey ' + owner + ' , got room for one more? ' + message.author.toString() + ' wants a piece of the action');
+                wantedChannel.send('Hey '+ owner + ', here are all the players currently away:');
+
+                var loop;
+                for (loop = 0; loop < awayPlayers.length; loop++) {
+                    wantedChannel.send(awayPlayers[loop]);
+                }
             break;
          }
     }

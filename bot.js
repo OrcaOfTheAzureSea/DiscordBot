@@ -9,7 +9,7 @@ var owner = '';
 var channelToSendTo = '';
 var awayPlayers = [];
 
-client.login("NzYxNzMxMDI5NzQ4MDIzMzI3.X3e3TQ.gExQnDV3rLUUO0B2nDPUVbsAJ3k");
+client.login("<token>");
 
 client.on('message', message => {
     console.log(message.content);
